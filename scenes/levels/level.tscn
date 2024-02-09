@@ -1,17 +1,17 @@
 [gd_scene load_steps=4 format=3 uid="uid://bwqdsa3615t7x"]
 
-[ext_resource type="Texture2D" uid="uid://dvkbi3lw4ja0g" path="res://icon.svg" id="1_fi8b6"]
-[ext_resource type="Texture2D" uid="uid://dkmodw3wg1c0e" path="res://graphics/car/main.png" id="2_e4ktt"]
-[ext_resource type="PackedScene" uid="uid://cjt2x5jae368v" path="res://scenes/levels/Player.tscn" id="3_0xupc"]
+[ext_resource type="PackedScene" uid="uid://cjt2x5jae368v" path="res://scenes/Player/Player.tscn" id="1_qy4fu"]
+[ext_resource type="PackedScene" uid="uid://brrrjah1wb1jg" path="res://scenes/Objects/bed.tscn" id="2_damgl"]
+[ext_resource type="PackedScene" uid="uid://damnb2wyau83a" path="res://scenes/Objects/billboard.tscn" id="3_xgryj"]
 
 [node name="Level" type="Node2D"]
 
-[node name="Logo" type="Sprite2D" parent="."]
-texture = ExtResource("1_fi8b6")
+[node name="Bed" parent="." instance=ExtResource("2_damgl")]
+position = Vector2(784, 205)
+scale = Vector2(0.7, 0.7)
 
-[node name="Car" type="Sprite2D" parent="Logo"]
-position = Vector2(812, 248)
-texture = ExtResource("2_e4ktt")
+[node name="Player" parent="." instance=ExtResource("1_qy4fu")]
+position = Vector2(130, 96)
 
-[node name="Player" parent="." instance=ExtResource("3_0xupc")]
-position = Vector2(386, 410)
+[node name="Billboard" parent="." instance=ExtResource("3_xgryj")]
+position = Vector2(548, 534)
