@@ -1,21 +1,32 @@
 [gd_scene load_steps=5 format=3 uid="uid://bwqdsa3615t7x"]
 
+[ext_resource type="Texture2D" uid="uid://b2ae1hhjojdko" path="res://graphics/objects/gate.png" id="1_1j4u8"]
+[ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_ql511"]
 [ext_resource type="PackedScene" uid="uid://cjt2x5jae368v" path="res://scenes/Player/Player.tscn" id="1_qy4fu"]
-[ext_resource type="PackedScene" uid="uid://brrrjah1wb1jg" path="res://scenes/Objects/bed.tscn" id="2_damgl"]
-[ext_resource type="PackedScene" uid="uid://damnb2wyau83a" path="res://scenes/Objects/billboard.tscn" id="3_xgryj"]
-[ext_resource type="PackedScene" uid="uid://bvs37ss1cx0rm" path="res://scenes/enemies/drone.tscn" id="4_i8y1f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2bhh0"]
+size = Vector2(857.5, 205)
 
 [node name="Level" type="Node2D"]
+script = ExtResource("1_ql511")
 
-[node name="Bed" parent="." instance=ExtResource("2_damgl")]
-position = Vector2(784, 205)
-scale = Vector2(0.7, 0.7)
+[node name="Gate" type="StaticBody2D" parent="."]
+
+[node name="Gate" type="Sprite2D" parent="Gate"]
+position = Vector2(504, -578)
+texture = ExtResource("1_1j4u8")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Gate"]
+polygon = PackedVector2Array(-937, -1355, -935, -1158, -925, -1, -888, 100, -801, 171, -703, 201, 131, 205, 131, -1, 989, -1, 989, 211, 1873, 201, 1974, 144, 2019, 92, 2046, 41, 2059, -11, 2065, -78, 2065, -1350)
+
+[node name="Area2D" type="Area2D" parent="Gate"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gate/Area2D"]
+position = Vector2(560, 104)
+shape = SubResource("RectangleShape2D_2bhh0")
 
 [node name="Player" parent="." instance=ExtResource("1_qy4fu")]
-position = Vector2(130, 96)
+position = Vector2(415, 421)
 
-[node name="Drone" parent="." instance=ExtResource("4_i8y1f")]
-position = Vector2(353, 326)
-
-[node name="Billboard" parent="." instance=ExtResource("3_xgryj")]
-position = Vector2(548, 534)
+[connection signal="body_entered" from="Gate/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Gate/Area2D" to="." method="_on_area_2d_body_exited"]
